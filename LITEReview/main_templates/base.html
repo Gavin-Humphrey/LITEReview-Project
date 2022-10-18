@@ -1,0 +1,46 @@
+<!---<html>
+<head>
+    <title>LITEReview</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://kit.fontawesome.com/8e873955b8.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div class="header__right">
+            {%if user.is_authenticated %}
+                <p><a href="{% url  %}">Flux</a></p>
+                <p><a href="{% url  %}">Découvertes</a></p>
+            {% endif %}
+        </div>
+        <a href="{% if user.is_authenticated %}{% url '' %}{% else %}{% url 'login' %}{% endif %}">
+            <div class="header__center">
+                <img class="logo" src="{% static 'img/logo_black.png' %}">
+                <h1>LITReviews</h1>
+            </div>
+        </a>
+        <div class="header__left">
+            {%if user.is_authenticated %}
+                <p><a href="{% url '' %}">Déconnexion</a></p>
+                <p><a href="{% url '' request.user %}">Mon Profil</a></p>
+            {% endif %}
+        </div>
+
+    </header>
+
+    <div class="container">
+        {% block content %}{% endblock content %}
+
+    </div>
+
+</body>
+</html>-->
+
+<html>
+<head>
+    <title>LITEReview</title>
+    <script src="https://kit.fontawesome.com/8e873955b8.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    {% block content %}{% endblock content %}
+</body>
+</html>
