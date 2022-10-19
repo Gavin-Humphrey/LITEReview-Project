@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.conf import settings
-#from authentication.views import subscription
-from authentication import views
-from authentication import views as v
+from django.urls import path, include
+from user import views as v 
+from feeds import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('subscription/', v.subscription, name='subscription'),
+    path('subscribe/', v.subscription, name='subscribe'),
+    path('', include("django.contrib.auth.urls")),
+    path('feeds/', views.feeds, name='feeds'),
+
 ]
