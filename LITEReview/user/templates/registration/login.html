@@ -1,6 +1,5 @@
 {% extends 'subscribe/base.html' %}
 
-
 {% block title %}
 {% endblock title %}
 
@@ -12,7 +11,7 @@
         {% csrf_token %}
         {{ form|crispy }}
         <div class="subscribe-link">
-            <p>Inscrivez-vous maintenant <button type="submit" class="btn btn-outline-secondary"><a href="/subscribe">S'inscrire</a></button></p>
+            <p>Besoin d'un compte ?<button type="submit" class="btn btn-outline-secondary"><a href="{% url 'register' %}">S'inscrire</a></button></p>
         </div>
         <button type="submit" class="btn btn-success">Se connecter</button>
     </form>

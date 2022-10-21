@@ -16,13 +16,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import path, include
-from user import views as v 
-from feeds import views
+from django.contrib.auth import views as auth_views
+from user import views as reg_views
+from feeds import views as feeds_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('subscribe/', v.subscription, name='subscribe'),
+    path('register/', reg_views.register, name='register'),
+    path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='registration/logout.html'), name='logout'),
+    path("profile/", reg_views.profile, name='profile'),
     path('', include("django.contrib.auth.urls")),
-    path('feeds/', views.feeds, name='feeds'),
+    path('feeds-home/', feeds_views.feeds, name='feeds-home'),
 
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
