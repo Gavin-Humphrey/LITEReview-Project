@@ -23,17 +23,17 @@ def register(request):
 
 
 
-#@login_required
+@login_required
 def profile(request):
     if request.method == 'POST':
         user_update = UserUpdate(request.POST, instance=request.user)
-        profile_update = ProfileUpdate(request.POST, request.FILES, instance=request.user.profile)
+        profile_update = ProfileUpdate(request.POST, request.FILES, instance=request.user.userprofile)#
 
         if user_update.is_valid() and profile_update.is_valid():
             user_update.save()
             profile_update.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('/feeds-home')
+            return redirect('profile')
 
     else:
         user_update = UserUpdate(instance=request.user)
@@ -46,3 +46,5 @@ def profile(request):
     }
 
     return render(request, 'registration/profile.html', context)
+
+

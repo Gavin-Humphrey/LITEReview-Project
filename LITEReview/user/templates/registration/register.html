@@ -1,4 +1,4 @@
-{% extends 'subscribe/base.html' %}
+{% extends 'feeds/base.html' %}
 {% load crispy_forms_tags %}
 
 {% block title %}
@@ -8,12 +8,12 @@
 {% block content %}
 
  <div class="form form__signup">
-    <p>Inscription</p>
+    <h4>Inscription</h4>
     <form method="Post">
       {% csrf_token %}
       {{ form|crispy }}
         <!--<input class="btn" type="submit" value="S'inscrire">-->
-        <button type="submit" class="btn btn-success">S'inscrire</button>
+        <button type="submit" class="btn btn-success">Signup</button>
     </form>
 </div>
 {% endblock content %}

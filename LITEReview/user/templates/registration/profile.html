@@ -1,13 +1,32 @@
-{% extends "subscribe/base.html" %}
+{% extends "feeds/base.html" %}
 {% load crispy_forms_tags %}
 {% block content%}
     <div class="content-section">
-        <div class="media">
-            <img class="rounded-circle account-img" src="{{ user.userprofile.image.url}}">
-            <div class="media-body">
-                <h2 class="account-heading">{{ user.username}}</h2>
-                <p class="text-secondary">{{ user.email}}</p>
-            </div>
-        </div>
+
+         <div class="col-bg-8"> 
+            <!-- <a href="#" class="thumbnail"> -->
+                <div class="caption">
+                    <h2 class="account-heading margin-bottom mt-4">{{ user.username}}</h2>
+                    <p class="text-secondary">{{ user.email}}</p>
+                </div>
+                <div class="image margin-bottom mb-4"> 
+                    <img src="{{ user.userprofile.image.url}}" class="img img-responsive" width="80%"/>
+                </div>
+            <!-- </a> -->
+        </div> 
+        
+    </div>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+    
+        <fieldset class="form-group">
+          <legend class="border-bottom mb-4">Profile Info</legend>
+          {{ user_update|crispy }}
+          {{ profile_update|crispy }}
+        <div class="float-right"> 
+            <button class="btn btn-outline-success" type="submit">Update</button> 
+        </div> 
+        </fieldset>
+      </form>
     </div>
 {% endblock content %}
