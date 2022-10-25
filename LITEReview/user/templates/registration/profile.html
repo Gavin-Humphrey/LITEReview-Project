@@ -10,7 +10,7 @@
                     <p class="text-secondary">{{ user.email}}</p>
                 </div>
                 <div class="image margin-bottom mb-4"> 
-                    <img src="{{ user.userprofile.image.url}}" class="img img-responsive" width="80%"/>
+                    <img class="rounded-circle account-img" src="{{ user.userprofile.image.url}}"/>
                 </div>
             <!-- </a> -->
         </div> 
@@ -21,8 +21,8 @@
     
         <fieldset class="form-group">
           <legend class="border-bottom mb-4">Profile Info</legend>
-          {{ user_update|crispy }}
-          {{ profile_update|crispy }}
+          {{ u_form|crispy }}
+          {{ p_form|crispy }}
         <div class="float-right"> 
             <button class="btn btn-outline-success" type="submit">Update</button> 
         </div> 

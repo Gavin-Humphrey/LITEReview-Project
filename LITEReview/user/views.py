@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 #from django.views.generic import View
-from  .forms import ProfileUpdate, SubsriptionForm, UserUpdate
+from  .forms import ProfileUpdateForm, RegisterForm, UserUpdateForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -12,13 +11,13 @@ from django.contrib.auth.models import User
 
 def register(request):
     if request.method == "POST":
-        form = SubsriptionForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, f'Your account has been created! You can now log in.')
         return redirect("/login")
     else:
-        form = SubsriptionForm()
+        form = RegisterForm()
     return render(request, "registration/register.html", {"form":form})
 
 
@@ -26,22 +25,22 @@ def register(request):
 @login_required
 def profile(request):
     if request.method == 'POST':
-        user_update = UserUpdate(request.POST, instance=request.user)
-        profile_update = ProfileUpdate(request.POST, request.FILES, instance=request.user.userprofile)#
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.userprofile)
 
-        if user_update.is_valid() and profile_update.is_valid():
-            user_update.save()
-            profile_update.save()
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
             messages.success(request, f'Your account has been updated!')
             return redirect('profile')
 
     else:
-        user_update = UserUpdate(instance=request.user)
-        profile_update = ProfileUpdate(instance=request.user.userprofile)
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.userprofile)
 
     context = {
-        'user_update': user_update,
-        'profile_update': profile_update,
+        'u_form': u_form,
+        'p_form': p_form,
         'title': 'Profile'
     }
 

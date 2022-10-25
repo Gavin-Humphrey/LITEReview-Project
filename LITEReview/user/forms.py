@@ -1,18 +1,17 @@
 from django import forms
-#from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from .models import UserProfile#
+from .models import UserProfile
 from django.contrib.auth.models import User
 
 
 
-class SubsriptionForm(UserCreationForm):
+class RegisterForm(UserCreationForm):
     email = forms.EmailField()
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
-class UserUpdate(forms.ModelForm):
+class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
 
     class Meta:
@@ -20,9 +19,9 @@ class UserUpdate(forms.ModelForm):
         fields = ['username', 'email']
 
 
-class ProfileUpdate(forms.ModelForm):
+class ProfileUpdateForm(forms.ModelForm):
 
     class Meta:
-        model = UserProfile#
+        model = UserProfile
         fields = ['image']
 

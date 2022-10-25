@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
+#from feeds.views import create_review
 from user import views as reg_views
 from feeds import views as feeds_views
 from django.conf import settings
 from django.conf.urls.static import static
+#from feeds.views import create_ticket
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,6 +32,9 @@ urlpatterns = [
     path('profile/', reg_views.profile, name='profile'),
     path('', include("django.contrib.auth.urls")),
     path('feeds-home/', feeds_views.feeds, name='feeds-home'),
+    path('create-ticket/', feeds_views.create_ticket, name='create_ticket'),
+    path('create-review/', feeds_views.create_review, name='create_review'),
+    
 
 ]
 if settings.DEBUG:

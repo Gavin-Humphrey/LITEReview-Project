@@ -11,7 +11,8 @@ class UserProfile(models.Model):#
 
     def __str__(self):
         return f'{self.user.username} Profile'
-##################
+
+
     def save(self, *args, **kwargs):
         super().save()
 
@@ -26,4 +27,12 @@ class UserProfile(models.Model):#
 
 
 
+class UserFollows(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class Meta:
+    # ensures we don't get multiple UserFollows instances
+    # for unique user-user_followed pairs
+    unique_together = ('user', 'followed_user', )
 
