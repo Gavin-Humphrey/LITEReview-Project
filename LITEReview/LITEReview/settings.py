@@ -33,9 +33,10 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "LITEReview",
-    "user.apps.UserConfig", 
+    "users.apps.UsersConfig", 
     "crispy_forms",
     "feeds.apps.FeedsConfig",
+    "follow_auth.apps.FollowAuthConfig",
 
     "django.contrib.admin",
     "django.contrib.auth",
@@ -121,6 +122,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+
 MEDIA_ROOT = os.path.join(BASE_DIR, "_media")
 MEDIA_URL = "/media/"
 
@@ -129,6 +131,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = "/feeds-home"
 
 LOGIN_URL = "login"
+
+#AUTH_USER_MODEL = 'users.UserFollows'
 
 
 # Default primary key field type

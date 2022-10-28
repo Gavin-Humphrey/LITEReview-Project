@@ -24,15 +24,6 @@ class UserProfile(models.Model):#
         )
 
         img.save(self.image.path)
+   
 
-
-
-class UserFollows(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-
-class Meta:
-    # ensures we don't get multiple UserFollows instances
-    # for unique user-user_followed pairs
-    unique_together = ('user', 'followed_user', )
 

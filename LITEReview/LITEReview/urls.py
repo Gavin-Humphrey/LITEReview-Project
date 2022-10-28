@@ -18,10 +18,11 @@ from django.urls import path
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 #from feeds.views import create_review
-from user import views as reg_views
+from users import views as reg_views
 from feeds import views as feeds_views
 from django.conf import settings
 from django.conf.urls.static import static
+from users import views as f_views
 #from feeds.views import create_ticket
 
 urlpatterns = [
@@ -30,10 +31,13 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='registration/logout.html'), name='logout'),
     path('profile/', reg_views.profile, name='profile'),
+    path('follow_page/<int:pk>/', f_views.follows_page, name='follow-page'),
     path('', include("django.contrib.auth.urls")),
-    path('feeds-home/', feeds_views.feeds, name='feeds-home'),
+    path('feeds-home/', feeds_views.feeds, name='feeds_home'),
     path('create-ticket/', feeds_views.create_ticket, name='create_ticket'),
     path('create-review/', feeds_views.create_review, name='create_review'),
+    path('create-review/', feeds_views.create_ticket_and_review, name='create_ticket_and_review'),
+    #path('user-follow/', f_views.follows_search, name='user_follow'),
     
 
 ]
