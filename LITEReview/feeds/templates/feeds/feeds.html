@@ -3,20 +3,102 @@
  
 {% block content %}
 
+<div class="container">
 
-
- <div class="container p-0"> 
-    <div class="row mb-2">
-      <h1 class="col-8 py-2 mb-0">
-        {% if posts %}
-          {{ title }}
-        {% endif %}
-      </h1>
-      <div class="btn-group col py-2 mt-4 mb-1" role="group">
-        <button type="button" class="btn btn-outline-primary mr-4"><a href="/create-ticket">Create Ticket</a></button>
-        <button type="button" class="btn btn-outline-success"><a href="/create-review">Publish A Review</a></button> 
-      </div>
-    </div>
-  </div> 
+ 
+  <a href="{% url 'create-ticket' %}">
+      <button class="btn">Create a ticket</button>
+  </a>
+  <a href="{% url 'create_ticket_and_review' %}">
+      <button class="btn">Create a review</button>
+  </a>
 </div>
-{% endblock content%}
+
+<div class="main">
+    {%if user.is_authenticated %}
+        <a href="{% url 'user_profile' user.username %}">
+            {% if user.userprofile_pics %}
+                <img class="profile-pic" src="{{ user.userprofile_pics.url }}">
+            
+            {% endif %}
+        </a>
+    <p>Bienvenue, <b>{{ request.user }}</b> !</p>
+    {% endif %}
+
+    <div class="container">
+
+        <a href="{% url 'create_ticket' %}">
+            <button class="btn">Review request</button>
+        </a>
+        <a href="{% url 'create_ticket_and_review' %}">
+            <button class="btn">Post a review</button>
+        </a>
+    </div>
+
+    {% if '/feeds/' in request.path %}
+        <h2>My posts</h2>
+    {% else %}
+        <h2>Events</h2>
+    {% endif %}
+
+        {% for instance in page_obj %}
+
+            {% if instance|model_type == 'Ticket' %}
+
+                <div class="container__feed ticket {% if instance.has_review %}reviewed{% endif %}">
+                    <div class="user-date">
+                        <div class="user-infos">
+                            {% include 'feeds/user_infos_snippet.html' with user=instance.user %}
+                            <p><a href="{% url 'profile' instance.user.username %}"><strong>{{ instance.user.username }}</strong></a> wants a review</p>
+                        </div>
+                        <p>{{ instance.time_created }}</p>
+                    </div>
+                    {% include 'feeds/ticket_snippet.html' with ticket=instance %}
+                    <div class="container__buttons">
+                    {% if instance.user == request.user %}
+                        <a href="{% url 'edit_ticket' instance.id %}">Edit / delete request</a>
+                    {% endif %}
+                    {% if instance.has_review == False %}
+                        <a href="{% url 'create_review' instance.id %}">
+                            <button class="btn">Post a review</button>
+                        </a>
+                    {% endif %}
+                    </div>
+                </div>
+
+
+            {% elif instance|model_type == 'Review' %}
+
+                <div class="container__feed review">
+                    {% include 'feeds/review_snippet.html' with review=instance %}
+                    {% if instance.user == request.user %}
+                        <a href="{% url 'edit_review' instance.id %}">Edit / review</a>
+                    {% endif %}
+                </div>
+
+            {% endif %}
+
+        {% endfor %}
+    <span>
+        {% if page_obj.has_previous %}
+            <a href="?page=1">« first</a> |
+            <a href="?page={{ page_obj.previous_page_number }}">← previous</a>
+        {% endif %}
+
+        <span>
+            Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}.
+
+        </span>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next →</a> |
+
+            <a href="?page={{ page_obj.paginator.num_pages }}">last »</a>
+        {% endif %}
+    </span>
+</div>
+
+
+<div class="col-25">
+</div>
+
+{% endblock content %}

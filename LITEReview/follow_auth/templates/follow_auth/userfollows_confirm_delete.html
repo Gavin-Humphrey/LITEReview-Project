@@ -1,0 +1,20 @@
+{% extends "feeds/base.html" %}
+{% block content %}
+
+<div class="content-section">
+    <form method="POST">
+      {% csrf_token %}
+  
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Unfollow</legend>
+        <h3>Are you sure you want to unfollow {{ unfollow.followed_user }}?</h3>
+      </fieldset>
+      <div class="form-group">
+        <button class="btn btn-outline-danger" type="submit">Yes, Unfollow</button>
+        <a class="btn btn-outline-secondary" href="{% url 'follows_page' %}">Cancel</a>
+      </div>
+  
+    </form>
+  </div>
+
+{% endblock content %}

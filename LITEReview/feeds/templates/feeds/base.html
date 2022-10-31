@@ -23,27 +23,29 @@
                         <div class="collapse navbar-collapse" id="collapsibleNavbar">
                             <ul class="navbar-nav ms-auto">
                                 <li class="nav-item">
-                                    <h4 class="nav-link hello-msg"><img class="rounded-circle msg-img" src="{{ user.userprofile.image.url}}"/> Hello! {{ user.username}} </h4>
+                                    <h4 class="nav-link hello-msg"><img class="rounded-circle msg-img" src="{{ user.userprofile.image.url }}"/> Hello! {{ user.username}} </h4>
                                     
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'login' %}">Home</a>
                                 </li>
+                                
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/feeds-home">Feeds</a>
+                                    <a class="nav-link" href="{% url 'feeds-home' %}">Feeds</a>
                                 </li>
+ 
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Posts</a>
                                     <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="/create-ticket">Post A Review</a></li>
-                                    <li><a class="dropdown-item" href="create-review">Publish A Review</a></li>
+                                    <li><a class="dropdown-item" href="/create_review">Post A Review</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'create-ticket' %}">Publish A Review</a></li>
                                     </ul>
                                 </li> 
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Abonnement</a>
                                     <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
-                                    <li><a class="dropdown-item" href="./follow_page.html">Follows</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'follows_page' %}">Follows</a></li>
                                     <li><a class="dropdown-item" href="#">A third link</a></li>
                                     </ul>
                                 </li>
@@ -51,19 +53,20 @@
                                     <a class="nav-link" href="/logout">Logout</a>
                                 </li>
                             </ul>
-                                {% else %}
+                        {% else %}
                             <ul class="navbar-nav ms-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                                <a class="nav-link" href="{% url 'login' %}">Login</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'register' %}">Signup</a>
                                 </li>
                             </ul>
-                    
+                            
+                    {% endif %}
                         </div>
                         
-                    {% endif %}
+                    
 
                 </div>
             </nav>

@@ -7,13 +7,44 @@ from django.core.paginator import Paginator
 from follow_auth.models import UserFollows
 
 
-@login_required(login_url='login')
+
+
+def dashboard(request):
+    tickets = models.Ticket.objects.all()
+    reviews = models.Review.objects.all()
+
+
+    tickets_and_reviews = sorted(
+        chain(tickets, reviews),
+        key=lambda instance: instance.time_created,
+        reverse=True
+    )
+
+    paginator = Paginator(tickets_and_reviews, 5)
+    page = request.GET.get('page')
+    page_obj = paginator.get_page(page)
+
+    context = {
+        'page_obj': page_obj,
+  
+    }
+
+    return render(
+        request,
+        'feeds/feeds.html',
+        context
+    )
+
+
+
+@login_required
 def feeds(request):
+    
     tickets = models.Ticket.objects.filter(
-            
+        user__in=request.user.follows.all()
     )
     reviews = models.Review.objects.filter(
-       
+        user__in=request.user.follows.all()  
     )
     tickets_and_reviews = sorted(
         chain(tickets, reviews),
@@ -21,7 +52,7 @@ def feeds(request):
         reverse=True
     )
 
-    paginator = Paginator(tickets_and_reviews, 6)
+    paginator = Paginator(tickets_and_reviews, 5)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
 
@@ -35,7 +66,6 @@ def feeds(request):
         context
     )
 
-  
 
 @login_required
 def create_ticket(request):
@@ -54,10 +84,8 @@ def create_ticket(request):
     }
     return render(
         request,
-        'feeds/create_ticket.html',
-        context
+        'feeds/create_ticket.html', context
     )
-
 
 @login_required
 def create_review(request, ticket_id):
@@ -67,7 +95,7 @@ def create_review(request, ticket_id):
         if form.is_valid():
             review = form.save(commit=False)
             review.user = request.user
-            review.ticket = get_object_or_404(models.Ticket, id=ticket_id)
+            review.ticket = get_object_or_404(models.Ticket, id=ticket_id) 
             review.ticket.has_review = True
             review.ticket.save()
             review.save()
@@ -81,6 +109,7 @@ def create_review(request, ticket_id):
         'feeds/create_review.html',
         context
     )
+
 
 
 @login_required
@@ -109,31 +138,8 @@ def create_ticket_and_review(request):
     }
     return render(
         request,
-        'feeds/create_review.html',
+        'feeds/feeds.html',
         context
     )
 
 
-
-# review/forms.py
-"""@login_required
-def create_ticket_and_review(request):
-    review_form = forms.ReviewForm()
-    ticket_form = forms.TicketForm()
-    if request.method == 'POST':
-        review_form = forms.ReviewForm(request.POST)
-        ticket_form = forms.TicketForm(request.POST, request.FILES)
-        if all([review_form.is_valid(), ticket_form.is_valid()]):
-            ticket = ticket_form.save(commit=False)
-            ticket.user = request.user
-            ticket.save()
-            review = review_form.save(commit=False)
-            review.user = request.user
-            review.ticket = ticket
-            review.save()
-            return redirect('home')
-    context = {
-        'review_form': review_form,
-        'ticket_form': ticket_form,
-}
-    return render(request, 'feeds/create_review.html', context=context)"""

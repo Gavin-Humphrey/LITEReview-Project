@@ -7,6 +7,9 @@ from django.contrib.auth.models import User
 from follow_auth.forms import FollowForm
 from follow_auth.models import UserFollows
 from django.db import IntegrityError
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin, UserPassesTestMixin)
+from django.views.generic import DeleteView
 
 
 
@@ -66,24 +69,42 @@ def follows_page(request):
                         try:
                             UserFollows.objects.create(user=request.user, followed_user=followed_user)
                             messages.success(request, f'You are now following {followed_user}!')
+                            
                         except IntegrityError:
                             messages.error(request, f'You are already following {followed_user}!')
 
                 except User.DoesNotExist:
                     messages.error(request, f'The user {form.data["followed_user"]} does not exist.')
 
-            else:
-                form = FollowForm()
+    else:
+        form = FollowForm()
 
-                user_follows = UserFollows.objects.filter(user=request.user).order_by('followed_user')
-                followed_by = UserFollows.objects.filter(followed_user=request.user).order_by('user')
+        user_follows = UserFollows.objects.filter(user=request.user).order_by('followed_user')
+        followed_by = UserFollows.objects.filter(followed_user=request.user).order_by('user')
 
-                context = {
-                    'form': form,
-                    'user_follows': user_follows,
-                    'followed_by': followed_by,
-                    'title': 'Subscriptions',
-                }
+        context = {
+            'form': form,
+            'user_follows': user_follows,
+            'followed_by': followed_by,
+            'title': 'Follows',
+        }
 
-                return render(request, 'feeds/follow_page.html', context)
+    return render(request, 'registration/follow_page.html', 
+    context
+    )
+
+class UnfollowUser(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = UserFollows
+    success_url = '/follow_page'
+    context_object_name = 'unfollow'
+
+    def test_func(self):
+        unfollow = self.get_object()
+        if self.request.user == unfollow.user:
+            return True
+        return False
+
+    def delete(self, request, *args, **kwargs):
+        messages.warning(self.request, f'You have stopped following {self.get_object().followed_user}.')
+        return super(UnfollowUser, self).delete(request, *args, **kwargs)
 

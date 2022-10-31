@@ -17,13 +17,14 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-#from feeds.views import create_review
 from users import views as reg_views
-from feeds import views as feeds_views
+from feeds import views as views
 from django.conf import settings
 from django.conf.urls.static import static
 from users import views as f_views
-#from feeds.views import create_ticket
+from feeds.views import edit_ticket, edit_review
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,14 +32,16 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='registration/logout.html'), name='logout'),
     path('profile/', reg_views.profile, name='profile'),
-    path('follow_page/<int:pk>/', f_views.follows_page, name='follow-page'),
+    path('follow_page/', f_views.follows_page, name='follows_page'),
+    path('confirm_unfollow/<int:pk>/', f_views.UnfollowUser.as_view(), name='confirm-unfollow'),
     path('', include("django.contrib.auth.urls")),
-    path('feeds-home/', feeds_views.feeds, name='feeds_home'),
-    path('create-ticket/', feeds_views.create_ticket, name='create_ticket'),
-    path('create-review/', feeds_views.create_review, name='create_review'),
-    path('create-review/', feeds_views.create_ticket_and_review, name='create_ticket_and_review'),
-    #path('user-follow/', f_views.follows_search, name='user_follow'),
-    
+    path('feeds-home/', views.feeds, name='feeds-home'),
+    path('create-ticket/', views.create_ticket, name='create-ticket'),
+    path('create-review/<int:ticket_id>/', views.create_review, name='create_review'),
+    path('create-ticket/', views.create_ticket_and_review, name='create_ticket_and_review'),
+    path('edit-ticket/<int:ticket_id>/', edit_ticket, name='edit_ticket'),
+    path('edit-review/<int:review_id>/', edit_review, name='edit_review'),
+    path('dashboard/', views.dashboard, name='dashboard'),
 
 ]
 if settings.DEBUG:

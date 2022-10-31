@@ -5,6 +5,7 @@
 
          <div class="col-bg-8"> 
             <!-- <a href="#" class="thumbnail"> -->
+                
                 <div class="caption">
                     <h2 class="account-heading margin-bottom mt-4">{{ user.username}}</h2>
                     <p class="text-secondary">{{ user.email}}</p>
@@ -28,5 +29,8 @@
         </div> 
         </fieldset>
       </form>
+      <h5><i class="fa fa-arrow-left" aria-hidden="true">
+        <a class="btn btn-link text-decoration-none" href="{% url 'feeds-home' %}">Return</a>
+      </i></h5>
     </div>
 {% endblock content %}

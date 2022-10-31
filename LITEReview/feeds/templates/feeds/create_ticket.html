@@ -1,22 +1,28 @@
 {% extends 'feeds/base.html' %}
 
 {% block content %}
-
-<div class="container mt-3">
-    <div class="form form__ticket">
-        <h5>Review This Book/Article!</h5>
-        <form method="post" enctype="multipart/form-data">
-            {{ form.as_p }}
-            {% csrf_token %}
-        </form>
+<div class="container">
+    <div class="row mb-2">
+      <h1 class="col-8 py-2 mb-0">{{ title }}</h1>
     </div>
-    <input class="btn" type="submit" value="Submit"> 
-       <!-- <button class="btn btn-outline-success" type="submit">Submit</button> -->
-    </form>
   </div>
   
+  <div class="content-section">
+    <form method="POST" enctype='multipart/form-data'>
+      {% csrf_token %}
+  
+      <fieldset class="form-group">
+        <h3 class="mb-4">Book / Article</h3>
+        {{ form.as_p }}
+        <div class="float-right mt-3">
+          <a class="btn btn-link text-decoration-none" href="{% url 'feeds-home' %}">Cancel</a>
+          <button class="btn btn-success" type="submit">Post</button>
+        </div>
+      </fieldset>
+  
+    </form>
+  </div>
 {% endblock content %}
-
 
 
 
