@@ -37,7 +37,7 @@ def feeds(request):
         'posts': posts,
         'r_tickets': replied_tickets,
         'r_reviews': replied_reviews,
-        'title': 'Feed',
+        'title': 'Feeds',
         'followed_users': followed_users
     }
 
@@ -146,7 +146,7 @@ def create_ticket(request):
 
     context = {
         'form': form,
-        'title': 'New Ticket'
+        'title': 'New Post'
     }
 
     return render(request, 'feeds/create_ticket.html', context)
