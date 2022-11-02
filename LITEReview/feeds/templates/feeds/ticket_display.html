@@ -27,13 +27,13 @@
         {% elif post.user not in followed_users %}
           <div class="ml-3 text-muted d-inline">
             <i>You are not following {{ post.user }}</i>
-            <a class="ml-2 text-success" href="{% url 'follows_page' %}">View subscriptions</a>
+            <!-- <a class="ml-2 text-success" href="{% url 'follows_page' %}">Show Followings</a> -->
           </div>
         {% endif %}
   
       </div>
-      <h6 class="mb-0"><span class="badge badge-primary">Ticket</span></h6>
-      <h2 class="mt-0"><a class="text-dark" href="{% url 'ticket-detail' post.id %}">{{ post.title }}</a></h2>
+      <h6 class="mb-0"><span class="badge badge-pill badge-secondary">Ticket</span></h6>
+      <h2 class="mt-0"><a class="text-dark text-decoration-none" href="{% url 'ticket-detail' post.id %}">{{ post.title }}</a></h2>
       <div class="ticket-description">
   
         {% if post.image %}

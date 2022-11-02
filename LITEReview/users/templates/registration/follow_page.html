@@ -37,7 +37,7 @@
                   <img class="rounded-circle article-img" src="{{ follow.followed_user.userprofile.image.url}}"
                        style="height:50px; width:50px" alt="{{ follow.followed_user.username }} profile picture">
                   {{ follow.followed_user.username }}
-                  <a class="btn btn-outline-danger btn-sm float-right mt-2" href="{% url 'confirm-unfollow' follow.id %}">
+                  <a class="btn btn-outline-danger btn-sm float-right mt-1" href="{% url 'confirm-unfollow' follow.id %}">
                     Unfollow
                   </a>
                 </p>

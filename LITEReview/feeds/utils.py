@@ -4,7 +4,7 @@ from feeds.models import Review, Ticket
 from follow_auth.models import UserFollows
 
 
-def get_viewable_reviews(user: User):
+def get_view_reviews(user: User):
     """
     All viewable reviews for user feed:
     """
@@ -27,7 +27,7 @@ def get_viewable_reviews(user: User):
     return reviews
 
 
-def get_viewable_tickets(user: User):
+def get_view_tickets(user: User):
     """
     All viewable tickets for user feed:
     """

@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.datastructures import MultiValueDictKeyError
 from .forms import ReviewForm, TicketForm
 from .models import Review, Ticket
-from .utils import (get_viewable_reviews, get_viewable_tickets, get_replied_tickets, get_follows)
+from .utils import (get_view_reviews, get_view_tickets, get_replied_tickets, get_follows)
 
 
 
@@ -16,10 +16,10 @@ from .utils import (get_viewable_reviews, get_viewable_tickets, get_replied_tick
 def feeds(request):
     followed_users = get_follows(request.user)
 
-    reviews = get_viewable_reviews(request.user)
+    reviews = get_view_reviews(request.user)
     reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
 
-    tickets = get_viewable_tickets(request.user)
+    tickets = get_view_tickets(request.user)
     tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
 
     replied_tickets, replied_reviews = get_replied_tickets(tickets)
@@ -158,13 +158,12 @@ def ticket_detail(request, pk):
     ticket = get_object_or_404(Ticket, id=pk)
     followed_users = get_follows(request.user)
 
-    replied_tickets, replied_reviews = get_replied_tickets([ticket])
+    # call: replied_tickets, replied_reviews = get_replied_tickets([ticket])
 
     context = {
         'post': ticket,
         'title': 'Ticket detail',
-        'r_tickets': replied_tickets,
-        'r_reviews': replied_reviews,
+        # include replied tickets and replied reviews
         'followed_users': followed_users,
     }
 
