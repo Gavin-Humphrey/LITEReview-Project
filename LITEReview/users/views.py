@@ -107,4 +107,3 @@ class UnfollowUser(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.warning(self.request, f'You have stopped following {self.get_object().followed_user}.')
         return super(UnfollowUser, self).delete(request, *args, **kwargs)
-

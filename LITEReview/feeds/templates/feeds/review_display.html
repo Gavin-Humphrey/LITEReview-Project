@@ -1,0 +1,42 @@
+<article class="media content-section">
+
+    <img class="rounded-circle article-img" src="{{ post.user.userprofile.image.url }}"
+         alt="{{ post.user.username }} profile picture">
+  
+    <div class="media-body">
+      <div class="article-metadata">
+  
+        {% if post.user != user %}
+  
+          {% if post.user in followed_users %}
+            <a class="mr-2 mb-0" href="{% url 'user-posts' post.user.id %}">{{ post.user }}</a>
+          {% else %}
+            <p class="mr-2 mb-0" style="display:inline">{{ post.user }}</p>
+          {% endif %}
+  
+        {% else %}
+          <a class="mr-2 mb-0" href="{% url 'my-posts' %}">{{ post.user }}</a>
+        {% endif %}
+  
+  
+      <!-- Ticket section -->
+      <article class="media content-section mr-3 mt-4" id="replied-ticket">
+        <div class="media-body">
+          <div class="article-metadata">
+            {% if post.ticket.user != user %}
+              {% if post.ticket.user in followed_users %}
+                <a class="mr-2 mb-0" href="{% url 'user-posts' post.ticket.user.id %}">{{ post.ticket.user }}</a>
+              {% else %}
+                <p class="mr-2 mb-0" style="display:inline">{{ post.ticket.user }}</p>
+              {% endif %}
+            {% else %}
+              <a class="mr-2 mb-0" href="{% url 'my-posts' %}">{{ post.ticket.user }}</a>
+            {% endif %}
+  
+            <small class="text-muted">{{ post.ticket.time_created|date:"H:i, F d, Y" }}</small>
+  
+        </div>
+      </article>
+  
+    </div>
+  </article>

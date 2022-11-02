@@ -14,15 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from users import views as reg_views
-from feeds import views as views
+from feeds import views as d_views
 from django.conf import settings
 from django.conf.urls.static import static
 from users import views as f_views
-from feeds.views import edit_ticket, edit_review
+
 
 
 
@@ -35,13 +34,12 @@ urlpatterns = [
     path('follow_page/', f_views.follows_page, name='follows_page'),
     path('confirm_unfollow/<int:pk>/', f_views.UnfollowUser.as_view(), name='confirm-unfollow'),
     path('', include("django.contrib.auth.urls")),
-    path('feeds-home/', views.feeds, name='feeds-home'),
-    path('create-ticket/', views.create_ticket, name='create-ticket'),
-    path('create-review/<int:ticket_id>/', views.create_review, name='create_review'),
-    path('create-ticket/', views.create_ticket_and_review, name='create_ticket_and_review'),
-    path('edit-ticket/<int:ticket_id>/', edit_ticket, name='edit_ticket'),
-    path('edit-review/<int:review_id>/', edit_review, name='edit_review'),
-    path('dashboard/', views.dashboard, name='dashboard'),
+    path('feeds-home/', d_views.feeds, name='feeds-home'),
+    path('my_posts/', d_views.user_posts, name='my-posts'),
+    path('user_posts/<int:pk>/', d_views.user_posts, name='user-posts'),
+    path('create-review/', d_views.create_review, name='create-review'),
+    path('create-ticket/', d_views.create_ticket, name='create-ticket'),
+    path('ticket/<int:pk>/detail/', d_views.ticket_detail, name='ticket-detail'),
 
 ]
 if settings.DEBUG:

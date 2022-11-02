@@ -78,7 +78,7 @@ class Migration(migrations.Migration):
                     "ticket",
                     models.ForeignKey(
                         blank=True,
-                        null=True,
+                        null=False,
                         on_delete=django.db.models.deletion.SET_NULL,
                         to="feeds.ticket",
                     ),

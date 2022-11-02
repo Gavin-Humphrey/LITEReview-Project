@@ -2,15 +2,15 @@
 
 {% block content %}
     <div class="form form__review">
-        <h2>Publish a review</h2>
+        <h2>Post a review</h2>
         {% if both %}
             <form method="post" enctype="multipart/form-data">
                 <h4>About this book:</h4>
                 {{ ticket_form.as_p }}
-                <h4>My review:</h4>
+                <h4>My Review:</h4>
                 {{ review_form.as_p }}
                 {% csrf_token %}
-                <input class="btn" type="submit" value="Submit">
+                <input class="btn" type="submit" value="submit">
             </form>
         {% else %}
             <form method="post">

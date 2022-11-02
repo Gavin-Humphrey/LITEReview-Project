@@ -1,0 +1,11 @@
+h3>{{ ticket.title }}</h3>
+<div class="photo-description">
+    {% if ticket.image %}
+        <p>
+            <img class="photo" src="{{ ticket.image.url }}">
+        </p>
+    {% endif %}
+    {% if ticket.description|length > 0 %}
+        <p class="description">{{ ticket.description }}</p>
+    {% endif %}
+</div>
