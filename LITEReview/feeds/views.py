@@ -9,6 +9,10 @@ from django.utils.datastructures import MultiValueDictKeyError
 from .forms import ReviewForm, TicketForm
 from .models import Review, Ticket
 from .utils import (get_view_reviews, get_view_tickets, get_replied_tickets, get_follows)
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.exceptions import PermissionDenied
+from django.views.generic import DeleteView
+from django.db.models import Q #
 
 
 
@@ -54,9 +58,11 @@ def user_posts(request, pk=None):
     followed_users = get_follows(request.user)
 
     reviews = Review.objects.filter(user=user)
+    #reviews = Review.objects.filter(Q(user__in=followed_users) | Q(ticket__user=user))# added
     reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
 
     tickets = Ticket.objects.filter(user=user)
+    #tickets = Review.objects.filter(Q(user__in=followed_users) | Q(review__user=user))# added
     tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
 
     replied_tickets, replied_reviews = get_replied_tickets(tickets)
@@ -125,6 +131,7 @@ def create_review(request):
     return render(request, 'feeds/create_review.html', context)
 
 
+
 @login_required
 def create_ticket(request):
     if request.method == 'POST':
@@ -153,23 +160,3 @@ def create_ticket(request):
 
 
 
-@login_required
-def ticket_detail(request, pk):
-    ticket = get_object_or_404(Ticket, id=pk)
-    followed_users = get_follows(request.user)
-
-    # call: replied_tickets, replied_reviews = get_replied_tickets([ticket])
-
-    context = {
-        'post': ticket,
-        'title': 'Ticket detail',
-        # include replied tickets and replied reviews
-        'followed_users': followed_users,
-    }
-
-    return render(request, 'reviews/post_detail.html', context)
-
-
-
-
-    

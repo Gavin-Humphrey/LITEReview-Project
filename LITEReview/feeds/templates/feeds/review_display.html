@@ -1,4 +1,4 @@
-<article class="media content-section">
+ <article class="media content-section">
 
     <img class="rounded-circle article-img" src="{{ post.user.userprofile.image.url }}"
          alt="{{ post.user.username }} profile picture">
@@ -18,7 +18,21 @@
           <a class="mr-2 mb-0" href="{% url 'my-posts' %}">{{ post.user }}</a>
         {% endif %}
   
+        <small class="text-muted">{{ post.time_created|date:"H:i, F d, Y" }}</small>
   
+        {% if post.user == user %}
+          <a class="ml-3 text-primary" href="{% url 'review-update' post.id %}">Update</a>
+          <a class="ml-2 text-danger" href="{% url 'review-delete' post.id %}">Delete</a>
+        {% elif post.user not in followed_users %}
+          <div class="ml-3 text-muted d-inline">
+            <i>You are not following {{ post.user }}</i>
+            <a class="ml-2 text-success" href="{% url 'follows_page' %}">Followings</a>
+          </div>
+        {% endif %}
+  
+      </div>
+  <!-- ------------ -->
+  <!-- -------- -->
       <!-- Ticket section -->
       <article class="media content-section mr-3 mt-4" id="replied-ticket">
         <div class="media-body">
@@ -34,7 +48,22 @@
             {% endif %}
   
             <small class="text-muted">{{ post.ticket.time_created|date:"H:i, F d, Y" }}</small>
+  <!-- -- -->
+  <!-- --------- -->
+          </div>
+          <h6 class="mb-0"><span class="badge badge-primary">Ticket</span></h6>
+          <h3 class="mt-0">
+            <a class="text-dark" href="{% url 'ticket-detail' post.ticket.id %}">{{ post.ticket.title }}</a>
+          </h3>
+          <div class="ticket-description">
   
+            {% if post.ticket.image %}
+              <img class="img-thumbnail float-left mb-1 mr-3" src="{{ post.ticket.image.url }}"
+                   alt="{{ post.ticket.title }}">
+            {% endif %}
+  
+            <p class="article-content text-justify mt-3 mr-3">{{ post.ticket.description }}</p>
+          </div>
         </div>
       </article>
   

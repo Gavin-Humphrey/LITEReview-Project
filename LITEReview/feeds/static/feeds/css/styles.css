@@ -100,9 +100,10 @@ body,
         border-bottom: 1px solid #e3e3e3
     }
     
-    
     .img-thumbnail {
         height: 150px;
     }
-    
+    .modify-post {
+        margin-left: 50px;
+    }
     

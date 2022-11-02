@@ -1,23 +1,16 @@
-{% extends 'feeds/base.html' %}
-
+{% extends "feeds/base.html" %}
 {% block content %}
-    <div class="form form__review">
-        <h2>Post a review</h2>
-        {% if both %}
-            <form method="post" enctype="multipart/form-data">
-                <h4>About this book:</h4>
-                {{ ticket_form.as_p }}
-                <h4>My Review:</h4>
-                {{ review_form.as_p }}
-                {% csrf_token %}
-                <input class="btn" type="submit" value="submit">
-            </form>
-        {% else %}
-            <form method="post">
-                {{ form.as_p }}
-                {% csrf_token %}
-                <input class="btn" type="submit" value="Submit">
-            </form>
-        {% endif %}
-    </div>
+
+<div class="container">
+  <div class="row mb-2">
+    <h1 class="col-8 py-2 mb-0">{{ title }}</h1>
+  </div>
+</div>
+
+{% if title == 'Ticket detail' %}
+  {% include 'feeds/ticket_display.html' %}
+{% elif title == 'Review detail' %}
+  {% include 'feeds/review_display.html' %}
+{% endif %}
+
 {% endblock content %}
