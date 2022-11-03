@@ -93,10 +93,10 @@ def user_posts(request, pk=None):
 @login_required
 def create_review(request):
     if request.method == 'POST':
-        t_form = TicketForm(request.POST, request.FILES)
-        r_form = ReviewForm(request.POST)
+        ticket_form = TicketForm(request.POST, request.FILES)
+        review_form = ReviewForm(request.POST)
 
-        if t_form.is_valid() and r_form.is_valid():
+        if ticket_form.is_valid() and review_form.is_valid():
             try:
                 image = request.FILES['image']
             except MultiValueDictKeyError:
@@ -125,11 +125,97 @@ def create_review(request):
     context = {
         't_form': t_form,
         'r_form': r_form,
-        'title': 'New Review'
+        'title': 'Post Review'
     }
 
     return render(request, 'feeds/create_review.html', context)
 
+
+@login_required
+def review_response(request, pk):
+    ticket = get_object_or_404(Ticket, id=pk)
+
+    if request.method == 'POST':
+        review_form = ReviewForm(request.POST)
+
+        if review_form.is_valid():
+            Review.objects.create(
+                ticket=ticket,
+                user=request.user,
+                headline=request.POST['headline'],
+                rating=request.POST['rating'],
+                body=request.POST['body']
+            )
+            messages.success(request, f'Your response to "{ticket.title}" has been posted!')
+            return redirect('feeds-home')
+
+    else:
+        r_form = ReviewForm()
+
+    context = {
+        'r_form': r_form,
+        'post': ticket,
+        'title': 'Response Review'
+    }
+
+    return render(request, 'feeds/create_review.html', context)
+
+
+
+@login_required
+def review_update(request, pk):
+    review = get_object_or_404(Review, id=pk)
+    if review.user != request.user:
+        raise PermissionDenied()
+
+    if request.method == 'POST':
+        r_form = ReviewForm(request.POST, instance=review)
+
+        if r_form.is_valid():
+            r_form.save()
+            messages.success(request, 'Your review has been updated!')
+            return redirect('feeds-home')
+
+    else:
+        r_form = ReviewForm(instance=review)
+
+    context = {
+        'r_form': r_form,
+        'post': review.ticket,
+        'title': 'Update Review'
+    }
+
+    return render(request, 'feeds/create_review.html', context)
+
+
+@login_required
+def review_detail(request, pk):
+    review = get_object_or_404(Review, id=pk)
+    followed_users = get_follows(request.user)
+
+    context = {
+        'post': review,
+        'title': 'Review detail',
+        'followed_users': followed_users
+    }
+
+    return render(request, 'feeds/post_detail.html', context)
+
+
+class ReviewDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Review
+    success_url = '/'
+    context_object_name = 'post'
+
+    def test_func(self):
+        review = self.get_object()
+        if self.request.user == review.user:
+            return True
+        return False
+
+    def delete(self, request, *args, **kwargs):
+        messages.warning(self.request, f'Your review "{self.get_object().headline}" has been deleted.')
+        return super(ReviewDeleteView, self).delete(request, *args, **kwargs)
 
 
 @login_required
@@ -159,4 +245,60 @@ def create_ticket(request):
     return render(request, 'feeds/create_ticket.html', context)
 
 
+@login_required
+def ticket_update(request, pk):
+    ticket = get_object_or_404(Ticket, id=pk)
+    if ticket.user != request.user:
+        raise PermissionDenied()
 
+    if request.method == 'POST':
+        form = TicketForm(request.POST, request.FILES, instance=ticket)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your ticket has been updated!')
+            return redirect('feeds-home')
+
+    else:
+        form = TicketForm(instance=ticket)
+
+    context = {
+        'form': form,
+        'title': 'Update Ticket'
+    }
+
+    return render(request, 'feeds/create_ticket.html', context)
+
+
+@login_required
+def ticket_detail(request, pk):
+    ticket = get_object_or_404(Ticket, id=pk)
+    followed_users = get_follows(request.user)
+
+    replied_tickets, replied_reviews = get_replied_tickets([ticket])
+
+    context = {
+        'post': ticket,
+        'title': 'Ticket detail',
+        'r_tickets': replied_tickets,
+        'r_reviews': replied_reviews,
+        'followed_users': followed_users,
+    }
+
+    return render(request, 'feeds/post_detail.html', context)
+
+
+class TicketDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Ticket
+    success_url = '/'
+    context_object_name = 'post'
+
+    def test_func(self):
+        ticket = self.get_object()
+        if self.request.user == ticket.user:
+            return True
+        return False
+
+    def delete(self, request, *args, **kwargs):
+        messages.warning(self.request, f'Your ticket "{self.get_object().title}" has been deleted.')
+        return super(TicketDeleteView, self).delete(request, *args, **kwargs)

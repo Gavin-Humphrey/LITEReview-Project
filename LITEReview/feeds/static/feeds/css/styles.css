@@ -2,8 +2,8 @@ body,
     html {
         margin: 0;
         padding: 0;
-        height: 100%;
-        background: whitesmoke !important;
+        height: 100%; 
+        background: wheat !important;
     }
     .user_card {
         width: 350px;
@@ -66,16 +66,15 @@ body,
         margin-right: 20px;
     }
 
-    
     .site-header {
         color: #ffffff;
-    }
+    }  
     
     /* Posts */
     .content-section {
         background: #ffffff;
         padding: 10px 20px;
-        border: 1px solid #dddddd;
+        border: 2px solid #b05050;
         border-radius: 3px;
         margin-bottom: 20px;
     }
@@ -105,5 +104,5 @@ body,
     }
     .modify-post {
         margin-left: 50px;
-    }
+    }   
     

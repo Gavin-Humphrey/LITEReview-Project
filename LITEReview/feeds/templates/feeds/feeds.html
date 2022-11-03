@@ -5,21 +5,21 @@
 
 <div class="container p-0">
     <div class="row mb-2">
-      <h1 class="col-8 py-2 mb-0">
+      <h2 class="col-8 py-2 mb-0 font-weight-bold">
         {% if posts %}
           {{ title }}
         {% endif %}
-      </h1>
+      </h2>
       <div class="btn-group col py-2 mt-2 mb-1" role="group">
-        <a type="button" class="btn btn-outline-secondary mr-sm-2" href="{% url 'create-ticket' %}">Create Ticket</a>
-        <a type="button" class="btn btn-outline-secondary" href="{% url 'create-review' %}">Write Review</a>
+        <a type="button" class="btn btn-outline-secondary mr-sm-2 font-weight-bold" href="{% url 'create-ticket' %}">Create Ticket</a>
+        <a type="button" class="btn btn-outline-secondary font-weight-bold" href="{% url 'create-review' %}">Write Review</a>
       </div>
     </div>
   </div>
   
   {% if posts %}
 
-  <!-- add page turning here -->
+ <!--paging -->
 
   {% for post in posts %}
 
@@ -31,7 +31,7 @@
 
   {% endfor %}
 
- <!-- add page turning here -->
+  <!-- paging -->
 
 {% else %}
 
@@ -57,3 +57,4 @@
   {% endif %}
   
   {% endblock content %}
+  
