@@ -14,11 +14,12 @@
   
       <fieldset class="form-group">
         {% if request.get_full_path == "create-review" %}
-          <h3 class="mb-4">Book / Article</h3>
+          <h3 class="mb-4">Book</h3>
           {{ t_form|crispy }}
   
         {% else %}
-        <!-- Ticket for response review -->
+        
+        <!-- Response review ticket-->
           <h4 class="mb-4">Replying to {{ post.user }} :</h4>
           <article class="media ml-4 mr-4">
             <div class="media-body">

@@ -83,8 +83,8 @@
       </div>
         {% elif post.ticket.user not in followed_users %}
           <div class="ml-3 text-muted" style="display:inline">
-            You are not subscribed to {{ post.ticket.user }}
-            <a class="ml-2 text-success" href="{% url 'follows_page' %}">Followings</a>
+            You are not following {{ post.ticket.user }}
+            <a class="ml-2 text-success" href="{% url 'follows_page' %}">Follow</a>
           </div>
         {% endif %}
 

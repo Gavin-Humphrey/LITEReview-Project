@@ -11,8 +11,8 @@
         {% endif %}
       </h2>
       <div class="btn-group col py-2 mt-2 mb-1" role="group">
-        <a type="button" class="btn btn-outline-secondary mr-sm-2 font-weight-bold" href="{% url 'create-ticket' %}">Create Ticket</a>
-        <a type="button" class="btn btn-outline-secondary font-weight-bold" href="{% url 'create-review' %}">Write Review</a>
+        <a type="button" class="btn btn-outline-danger mr-sm-2 font-weight-bold" href="{% url 'create-ticket' %}">Create Ticket</a>
+        <a type="button" class="btn btn-outline-danger font-weight-bold" href="{% url 'create-review' %}">Write Review</a>
       </div>
     </div>
   </div>
@@ -45,7 +45,7 @@
           <a href="{% url 'craete-review' %}">Write</a> or
           <a href="{% url 'create-review' %}">request</a> a review, or follow a user to view their posts.
         </p>
-        <a type="button" class="btn btn-success" href="{% url 'follows_auth' %}">Followings</a>
+        <a type="button" class="btn btn-success" href="{% url 'follows_auth' %}">Follow</a>
       {% else %}
         <p class="card-text">You have not written any posts yet. <a href="{% url 'create-review' %}">Write</a> or
           <a href="{% url 'create-review' %}">request</a> a review to get started.

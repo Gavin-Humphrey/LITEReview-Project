@@ -30,22 +30,15 @@ def feeds(request):
 
     posts_list = sorted(chain(reviews, tickets), key=lambda post: post.time_created, reverse=True)
 
-    if posts_list:
-        paginator = Paginator(posts_list, 5)
-        page = request.GET.get('page')
-        posts = paginator.get_page(page)
-    else:
-        posts = None
-
-    context = {
-        'posts': posts,
-        'r_tickets': replied_tickets,
-        'r_reviews': replied_reviews,
-        'title': 'Feeds',
-        'followed_users': followed_users
-    }
-
-    return render(request, 'feeds/feeds.html', context)
+    
+    return render(request, 'feeds/feeds.html', 
+        context = {
+            'posts': posts_list,
+            'r_tickets': replied_tickets,
+            'r_reviews': replied_reviews,
+            'title': 'Feeds',
+            'followed_users': followed_users
+        })
 
 
 @login_required
@@ -69,25 +62,16 @@ def user_posts(request, pk=None):
 
     posts_list = sorted(chain(reviews, tickets), key=lambda post: post.time_created, reverse=True)
 
-    if posts_list:
-        paginator = Paginator(posts_list, 5)
-        page = request.GET.get('page')
-        posts = paginator.get_page(page)
-        total_posts = paginator.count
-    else:
-        posts = None
-        total_posts = 0
 
-    context = {
-        'posts': posts,
-        'title': f"{user.username}'s posts ({total_posts})",
-        'r_tickets': replied_tickets,
-        'r_reviews': replied_reviews,
-        'followed_users': followed_users
-    }
-
-    return render(request, 'feeds/feeds.html', context)
-
+    return render(request, 'feeds/feeds.html', 
+    
+        context = {
+            'posts': posts_list,
+            'title': f"{user.username}'s posts",
+            'r_tickets': replied_tickets,
+            'r_reviews': replied_reviews,
+            'followed_users': followed_users
+        })
 
 
 @login_required
