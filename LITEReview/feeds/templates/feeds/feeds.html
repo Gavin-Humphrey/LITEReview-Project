@@ -1,5 +1,6 @@
 {% extends 'feeds/base.html' %}
 {% load static %}
+
  
 {% block content %}
 
@@ -20,6 +21,7 @@
   {% if posts %}
 
  <!--paging -->
+ {% include 'feeds/pagination.html' %}
 
   {% for post in posts %}
 
@@ -32,6 +34,7 @@
   {% endfor %}
 
   <!-- paging -->
+  {% include 'feeds/pagination.html' %}
 
 {% else %}
 

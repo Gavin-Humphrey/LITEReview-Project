@@ -69,7 +69,6 @@ body,
     .site-header {
         color: #ffffff;
     }  
-    
     /* Posts */
     .content-section {
         background: #ffffff;
@@ -80,7 +79,7 @@ body,
     }
 
     #replied-ticket {
-        background: #fafafa;
+        background: rgb(245, 227, 227);
     }
     
     .article-content {
@@ -96,13 +95,50 @@ body,
     .article-metadata {
         padding-bottom: 1px;
         margin-bottom: 4px;
-        border-bottom: 1px solid #e3e3e3
+        border-bottom: 1px solid #e3e3e3;
+    }
+
+    #stars {
+        font-size: 22px;
+        color: #cccccc;
+        display:inline;
+    }
+    
+    .star-rating-1 i:first-child {
+        color: #ffc107;
+    }
+    
+    .star-rating-2 i:first-child,
+    .star-rating-2 i:first-child + i {
+        color: #ffc107;
+    }
+    
+    .star-rating-3 i:first-child,
+    .star-rating-3 i:first-child + i,
+    .star-rating-3 i:first-child + i + i {
+        color: #ffc107;
+    }
+    
+    .star-rating-4 i:first-child,
+    .star-rating-4 i:first-child + i,
+    .star-rating-4 i:first-child + i + i,
+    .star-rating-4 i:first-child + i + i + i {
+        color: #ffc107;
+    }
+    
+    .star-rating-5 i {
+        color: #ffc107;
     }
     
     .img-thumbnail {
-        height: 150px;
+        height: 200px;
+        width: 100vw;
+        border: 2px solid #b05050;
     }
     .modify-post {
         margin-left: 50px;
+        float: right;
+        font-size: x-small;
+        font-weight: bolder;
     }   
     

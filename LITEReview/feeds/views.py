@@ -30,15 +30,36 @@ def feeds(request):
 
     posts_list = sorted(chain(reviews, tickets), key=lambda post: post.time_created, reverse=True)
 
-    
-    return render(request, 'feeds/feeds.html', 
-        context = {
-            'posts': posts_list,
-            'r_tickets': replied_tickets,
-            'r_reviews': replied_reviews,
-            'title': 'Feeds',
-            'followed_users': followed_users
-        })
+    ####### Remove pagination here
+    if posts_list:
+        paginator = Paginator(posts_list, 3)
+        page = request.GET.get('page')
+        posts = paginator.get_page(page)
+    else:
+        posts = None
+
+    context = {
+        'posts': posts,
+        'r_tickets': replied_tickets,
+        'r_reviews': replied_reviews,
+        'title': 'Feeds',
+        'followed_users': followed_users
+    }
+
+    return render(request, 'feeds/feeds.html', context)
+    ############
+
+    ######### use if you want to remove pagination
+
+
+"""return render(request, 'feeds/feeds.html', 
+    context = {
+        'posts': posts_list,
+        'r_tickets': replied_tickets,
+        'r_reviews': replied_reviews,
+        'title': 'Feeds',
+        'followed_users': followed_users
+    })"""
 
 
 @login_required
@@ -63,15 +84,38 @@ def user_posts(request, pk=None):
     posts_list = sorted(chain(reviews, tickets), key=lambda post: post.time_created, reverse=True)
 
 
-    return render(request, 'feeds/feeds.html', 
+    ### Remove Pagination
+    if posts_list:
+        paginator = Paginator(posts_list, 3)
+        page = request.GET.get('page')
+        posts = paginator.get_page(page)
+        total_posts = paginator.count
+    else:
+        posts = None
+        total_posts = 0
+
+    context = {
+        'posts': posts,
+        'title': f"{user.username}'s posts ({total_posts})",
+        'r_tickets': replied_tickets,
+        'r_reviews': replied_reviews,
+        'followed_users': followed_users
+    }
+
+    return render(request, 'feeds/feeds.html', context)
+
+    ##############
     
-        context = {
-            'posts': posts_list,
-            'title': f"{user.username}'s posts",
-            'r_tickets': replied_tickets,
-            'r_reviews': replied_reviews,
-            'followed_users': followed_users
-        })
+    #### Use if you want to remove pagination
+"""return render(request, 'feeds/feeds.html', 
+
+    context = {
+        'posts': posts_list,
+        'title': f"{user.username}'s posts",
+        'r_tickets': replied_tickets,
+        'r_reviews': replied_reviews,
+        'followed_users': followed_users
+    })"""
 
 
 @login_required

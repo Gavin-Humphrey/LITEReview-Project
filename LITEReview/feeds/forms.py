@@ -20,7 +20,7 @@ class ReviewForm(forms.ModelForm):
     helper = FormHelper()
     helper.form_class = 'form-group'
     helper.layout = Layout(Field('headline'), InlineRadios('rating', style="display: flex; justify-content: space-around;"),
-        Field('body', rows="15"),
+        Field('body', rows="5"),
     )
 
 
