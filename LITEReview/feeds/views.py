@@ -141,18 +141,19 @@ def create_review(request):
                 ticket=t,
                 user=request.user,
                 headline=request.POST['headline'],
+                rating=request.POST['rating'],
                 body=request.POST['body']
             )
             messages.success(request, 'Your review has been posted!')
             return redirect('feeds-home')
 
     else:
-        t_form = TicketForm()
-        r_form = ReviewForm()
+        ticket_form = TicketForm()
+        review_form = ReviewForm()
 
     context = {
-        't_form': t_form,
-        'r_form': r_form,
+        't_form': ticket_form,
+        'r_form': review_form,
         'title': 'Post Review'
     }
 
@@ -164,9 +165,9 @@ def review_response(request, pk):
     ticket = get_object_or_404(Ticket, id=pk)
 
     if request.method == 'POST':
-        review_form = ReviewForm(request.POST)
+        r_form = ReviewForm(request.POST)
 
-        if review_form.is_valid():
+        if r_form.is_valid():
             Review.objects.create(
                 ticket=ticket,
                 user=request.user,
