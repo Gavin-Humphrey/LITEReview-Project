@@ -79,15 +79,15 @@ def follows_page(request):
     else:
         form = FollowForm()
 
-        user_follows = UserFollows.objects.filter(user=request.user).order_by('followed_user')
-        followed_by = UserFollows.objects.filter(followed_user=request.user).order_by('user')
+    user_follows = UserFollows.objects.filter(user=request.user).order_by('followed_user')
+    followed_by = UserFollows.objects.filter(followed_user=request.user).order_by('user')
 
-        context = {
-            'form': form,
-            'user_follows': user_follows,
-            'followed_by': followed_by,
-            'title': 'Follows',
-        }
+    context = {
+        'form': form,
+        'user_follows': user_follows,
+        'followed_by': followed_by,
+        'title': 'Follows',
+    }
 
     return render(request, 'registration/follow_page.html', 
     context

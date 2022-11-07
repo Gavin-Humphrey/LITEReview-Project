@@ -2,20 +2,15 @@
 {% load crispy_forms_tags %}
 {% block content%}
     <div class="content-section"> 
-
-         <div class="col-bg-8"> 
-            <!-- <a href="#" class="thumbnail"> -->
-                
-                <div class="caption">
-                    <h2 class="account-heading margin-bottom mt-4">{{ user.username}}</h2>
-                    <p class="text-secondary">{{ user.email}}</p>
-                </div>
-                <div class="image margin-bottom mb-4"> 
-                    <img class="rounded-circle account-img" src="{{ user.userprofile.image.url}}"/>
-                </div>
-            <!-- </a> -->
-        </div> 
-        
+        <div class="col-bg-8">  
+            <div class="caption">
+                <h2 class="account-heading margin-bottom mt-4">{{ user.username}}</h2>
+                <p class="text-secondary">{{ user.email}}</p>
+            </div>
+            <div class="image margin-bottom mb-4"> 
+                <img class="rounded-circle account-img" src="{{ user.userprofile.image.url}}"/>
+            </div>
+        </div>   
     </div> 
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -30,7 +25,7 @@
         </fieldset>
       </form>
       <h5>
-        <a class="btn btn-link text-decoration-none" href="{% url 'feeds-home' %}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Return to Feeds</a>
+        <a class="btn btn-link text-decoration-none" href="{% url 'feeds-home' %}"><i class="fas fa-arrow-alt-circle-left"></i> Return to Feeds</a>
       </i></h5>
     </div>
 {% endblock content %}

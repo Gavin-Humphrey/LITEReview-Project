@@ -86,13 +86,13 @@ body,
     }
 
     #replied-ticket {
-        background: rgb(245, 227, 227);
+        background: rgb(245, 227, 227); 
     }
     
     .article-content {
-        white-space: pre-line;
-    }
-    
+        white-space: pre-line; 
+    } 
+
     .article-img {
         height: 50px;
         width: 50px;
@@ -138,13 +138,10 @@ body,
     }
 
     .img-thumbnail {
-        /* height: 200px;
-        width: 100vw; */
-        height: 300px !important;
-        width: 100%; 
-        border: 2px solid #b05050;
-
-        
+        height: 200px !important;  /*100%*/ 
+        width: 70%;  
+        object-fit: fill;
+        border: 2px solid #b05050; 
     }
     .modify-post {
         margin-left: 50px;

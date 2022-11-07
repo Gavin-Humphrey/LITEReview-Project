@@ -65,7 +65,7 @@
               <p class="mr-2 mb-0" style="display:inline">{{ post.ticket.user }}</p>
             {% endif %}
           {% else %}
-            <a class="mr-2 mb-0" href="{% url 'my-posts' %}">{{ post.ticket.user }}</a>
+            <a class="mr-2 mb-0 text-decoration-none" href="{% url 'my-posts' %}">{{ post.ticket.user }}</a>
           {% endif %}
           
           <small class="text-muted">{{ post.ticket.time_created|date:"H:i, F d, Y" }}</small>

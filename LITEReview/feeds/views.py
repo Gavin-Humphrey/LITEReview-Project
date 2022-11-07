@@ -144,7 +144,7 @@ def create_review(request):
                 rating=request.POST['rating'],
                 body=request.POST['body']
             )
-            messages.success(request, 'Your review has been posted!')
+            messages.success(request, 'You have posted a review!')
             return redirect('feeds-home')
 
     else:
@@ -161,7 +161,7 @@ def create_review(request):
 
 
 @login_required
-def review_response(request, pk):
+def review_reply(request, pk):
     ticket = get_object_or_404(Ticket, id=pk)
 
     if request.method == 'POST':
@@ -175,7 +175,7 @@ def review_response(request, pk):
                 rating=request.POST['rating'],
                 body=request.POST['body']
             )
-            messages.success(request, f'Your response to "{ticket.title}" has been posted!')
+            messages.success(request, f'You have responded to "{ticket.title}"!')
             return redirect('feeds-home')
 
     else:
@@ -202,7 +202,7 @@ def review_update(request, pk):
 
         if r_form.is_valid():
             r_form.save()
-            messages.success(request, 'Your review has been updated!')
+            messages.success(request, 'You have updated your review!')
             return redirect('feeds-home')
 
     else:
@@ -260,7 +260,7 @@ def create_ticket(request):
                 description=request.POST['description'],
                 image=image
             )
-            messages.success(request, 'Your ticket has been posted!')
+            messages.success(request, 'You have posted a ticket!')
             return redirect('feeds-home')
 
     else:
@@ -285,7 +285,7 @@ def ticket_update(request, pk):
 
         if form.is_valid():
             form.save()
-            messages.success(request, 'Your ticket has been updated!')
+            messages.success(request, 'You updated your ticket!')
             return redirect('feeds-home')
 
     else:

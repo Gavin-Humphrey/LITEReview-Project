@@ -69,7 +69,7 @@
     
     {% elif post not in r_tickets %}
     <div class="btn float-right">
-      <a type="button" class="btn btn-success btn-sm" href="{% url 'response-review' post.id %}">
+      <a type="button" class="btn btn-success btn-sm" href="{% url 'review-reply' post.id %}">
         {% if post.user == user %}
           Reply to your Ticket
         {% else %}
