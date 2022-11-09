@@ -10,7 +10,6 @@
 </div>
 
 <div class="content-section">
-
   <!-- Follow form -->
   <h5 class="mb-3 mt-2">Add a Follow</h5>
   <fieldset class="form-group mt-3">
@@ -23,6 +22,9 @@
       </div>
     </form>
   </fieldset>
+{% for message in messages %}
+  <p id="messages">{{message}}</p>
+{% endfor %}
 
   <div class="row">
   <!-- Following -->
@@ -45,6 +47,7 @@
             {% endfor %}
           </ul>
         </div>
+       
       {% elif not user_follows %}
         <div class="card text-center mb-5">
           <div class="card-body">
@@ -82,6 +85,7 @@
       {% endif %}
     </div>
   </div>
+
   <a class="btn btn-link text-decoration-none" href="{% url 'feeds-home' %}"><i class="fas fa-arrow-alt-circle-left"></i> Return to Feeds</a>
 </div>
 

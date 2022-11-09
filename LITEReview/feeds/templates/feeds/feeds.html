@@ -19,7 +19,9 @@
   </div>
   
   {% if posts %}
-
+  {% for message in messages %}
+    <p id="messages">{{message}}</p>
+  {% endfor %} 
  <!--paging -->
  {% include 'feeds/pagination.html' %}
 

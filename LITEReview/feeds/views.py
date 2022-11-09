@@ -154,7 +154,7 @@ def create_review(request):
     context = {
         't_form': ticket_form,
         'r_form': review_form,
-        'title': 'Post Review'
+        'title': 'Post Review' 
     }
 
     return render(request, 'feeds/create_review.html', context)
@@ -167,7 +167,7 @@ def review_reply(request, pk):
     if request.method == 'POST':
         r_form = ReviewForm(request.POST)
 
-        if r_form.is_valid():
+        if r_form.is_valid(): 
             Review.objects.create(
                 ticket=ticket,
                 user=request.user,

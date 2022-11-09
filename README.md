@@ -1,7 +1,7 @@
-Projet LITEReview
+Projet LITReview
 
 Mon projet OpenClassrooms de la formation D-A Python.
-Il s'agit d'une application Web réalisée avec Django ORM pour la société LitReviews.
+Il s'agit d'une application Web réalisée avec Django pour la société LitReview.
 Une application de réseau social pour demander et publier des critiques de livres/articles.
 
 Fonctionnalités:

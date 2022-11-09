@@ -50,8 +50,8 @@ urlpatterns = [
     path('ticket/<int:pk>/delete/', TicketDeleteView.as_view(), name='ticket-delete'),
 
     # Review urls
-    path('create-review/', d_views.create_review, name='create-review'),
-    path('review/reply/<int:pk>', d_views.review_reply, name='review-reply'),
+    path('create-review/ticket-review/', d_views.create_review, name='create-review'),
+    path('review/reply/<int:pk>', d_views.review_reply, name='review-reply'), 
     path('review/<int:pk>/detail', d_views.review_detail, name='review-detail'),
     path('review/<int:pk>/update/', d_views.review_update, name='review-update'),
     path('review/<int:pk>/delete/', ReviewDeleteView.as_view(), name='review-delete'),

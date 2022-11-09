@@ -75,7 +75,10 @@ html {
     display: none !important;
 } 
 #messages{
+    width: 50% !important;
+    border-radius: 20px;
     background-color: grey; /***/
+    justify-items: center;
     color: #fff;
     padding: 10px;
     margin-top: 10px;

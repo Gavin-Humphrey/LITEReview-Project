@@ -1,10 +1,8 @@
 {% extends 'feeds/base.html' %}
 {% load static %}
-
 {% load crispy_forms_tags %}
 
 {% block title %}
-
 {% endblock title %}
 
 {% block content %}
@@ -34,8 +32,8 @@
 </div> 
 
 <script>
-	/* Because i didnt set placeholder values in forms.py they will be set here using vanilla Javascript
-//I start indexing at one because CSRF_token is considered and input field 
+	/* Placeholder values will be set here using vanilla Javascript as they weren't set in forms.py
+//Indexing starts at one because CSRF_token is considered an input field 
 */
 
 //Query All input fields
