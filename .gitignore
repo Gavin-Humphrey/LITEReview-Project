@@ -5,3 +5,5 @@ __pycache__/
 env/
 _media/
 ._media/
+/LITEReview/env/
+.gitignore/

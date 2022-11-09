@@ -21,7 +21,7 @@ from feeds import views as d_views
 from django.conf import settings
 from django.conf.urls.static import static
 from users import views as f_views
-from feeds.views import TicketDeleteView, ReviewDeleteView
+from feeds.views import (TicketDeleteView, ReviewDeleteView)
 
 
 
@@ -42,12 +42,6 @@ urlpatterns = [
     path('', include("django.contrib.auth.urls")),
     path('follow_page/', f_views.follows_page, name='follows_page'),
     path('confirm_unfollow/<int:pk>/', f_views.UnfollowUser.as_view(), name='confirm-unfollow'),
-   
-    # Ticket urls 
-    path('create-ticket/', d_views.create_ticket, name='create-ticket'),
-    path('ticket/<int:pk>/detail/', d_views.ticket_detail, name='ticket-detail'),
-    path('ticket/<int:pk>/update/', d_views.ticket_update, name='ticket-update'),
-    path('ticket/<int:pk>/delete/', TicketDeleteView.as_view(), name='ticket-delete'),
 
     # Review urls
     path('create-review/ticket-review/', d_views.create_review, name='create-review'),
@@ -55,7 +49,12 @@ urlpatterns = [
     path('review/<int:pk>/detail', d_views.review_detail, name='review-detail'),
     path('review/<int:pk>/update/', d_views.review_update, name='review-update'),
     path('review/<int:pk>/delete/', ReviewDeleteView.as_view(), name='review-delete'),
-
+   
+    # Ticket urls 
+    path('create-ticket/', d_views.create_ticket, name='create-ticket'),
+    path('ticket/<int:pk>/detail/', d_views.ticket_detail, name='ticket-detail'),
+    path('ticket/<int:pk>/update/', d_views.ticket_update, name='ticket-update'),
+    path('ticket/<int:pk>/delete/', TicketDeleteView.as_view(), name='ticket-delete'),
 
 ]
 if settings.DEBUG:

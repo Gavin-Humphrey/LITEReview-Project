@@ -12,7 +12,8 @@ from .utils import (get_view_reviews, get_view_tickets, get_replied_tickets, get
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.views.generic import DeleteView
-from django.db.models import Q #
+from django.urls import reverse_lazy ####added
+
 
 
 
@@ -72,11 +73,9 @@ def user_posts(request, pk=None):
     followed_users = get_follows(request.user)
 
     reviews = Review.objects.filter(user=user)
-    #reviews = Review.objects.filter(Q(user__in=followed_users) | Q(ticket__user=user))# added
     reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
 
     tickets = Ticket.objects.filter(user=user)
-    #tickets = Review.objects.filter(Q(user__in=followed_users) | Q(review__user=user))# added
     tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
 
     replied_tickets, replied_reviews = get_replied_tickets(tickets)
@@ -233,7 +232,8 @@ def review_detail(request, pk):
 
 class ReviewDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Review
-    success_url = '/'
+    success_url = reverse_lazy('feeds-home') #### added
+    # success_url = '/' ##### Removed
     context_object_name = 'post'
 
     def test_func(self):
@@ -319,7 +319,8 @@ def ticket_detail(request, pk):
 
 class TicketDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Ticket
-    success_url = '/'
+    success_url = reverse_lazy('feeds-home') #### Added
+    # success_url = '/' ### Removed
     context_object_name = 'post'
 
     def test_func(self):
