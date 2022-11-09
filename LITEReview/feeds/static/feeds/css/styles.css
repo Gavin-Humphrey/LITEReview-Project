@@ -22,14 +22,14 @@ html {
 
 }
 
-/* ------------ */
 .col-4 {
     width: 800px !important;
 }
+
 .col-8 {
     margin-top: 40px !important;
 }
-/* ----------- */
+
 .form_container {
     margin-top: 20px;
 }
@@ -37,9 +37,11 @@ html {
 #form-title {
     color: black;
 }
+
 .form-group {
     color: black;
 }
+
 .text-muted-p {
     color: #fff;
 }
@@ -48,52 +50,62 @@ html {
     justify-content: center;
     align-items: center;
 }
+
 .login_btn {
     width: 60%;
     background: #33ccff !important;  
     color: white !important;
 }
+
 .login_btn:focus {
     box-shadow: none !important;
     outline: 0px !important;
 }
+
 .login_container {
     padding: 0 2rem;
 }
+
 .input-group-text {
     background: #f7ba5b !important;
     color: white !important;
     border: 0 !important;
     border-radius: 0.25rem 0 0 0.25rem !important;
 }
+
 .input_user,
 .input_pass:focus {
     box-shadow: none !important;
     outline: 0px !important;
 }
+
 #hint_id_password1, #hint_id_password2, #hint_id_username {
     display: none !important;
-} 
+}
+
 #messages{
     width: 50% !important;
     border-radius: 20px;
-    background-color: grey; /***/
-    justify-items: center;
-    color: #fff;
+    background-color: rgb(159, 232, 159); 
+    text-align: center !important;
+    color: rgb(11, 142, 11);
     padding: 10px;
     margin-top: 10px;
 } 
+
 .msg-img  {
     width: 40px !important;
     margin-right: 10px;
 }
+
 .hello-msg {
     margin-right: 20px;
 }
 
 .site-header {
     color: #ffffff;
-}  
+} 
+
 /* Posts */
 .content-section {
     background: rgb(241, 237, 237);
@@ -112,6 +124,7 @@ html {
     text-align: left !important;
     word-spacing: normal !important;
 } 
+
 .article-img {
     height: 50px;
     width: 50px;
@@ -124,12 +137,12 @@ html {
     margin-bottom: 4px;
     border-bottom: 1px solid #e3e3e3;
 }
+
 .article-metadata a:hover { /*???????*/
     color: #333;
     text-decoration: none;
 }
     
-
 #stars {
     font-size: 15px;
     color: #cccccc;
@@ -163,11 +176,13 @@ html {
 }
 
 .img-thumbnail {
-    height: 200px !important;  /*100%*/ 
+    height: 300px !important;  /*200%*/ 
+    /* border-radius: 10px !important; */
     width: 70%;  
     object-fit: fill;
     border: 2px solid green !important;
 }
+
 .modify-post {
     margin-left: 50px;
     float: right;
