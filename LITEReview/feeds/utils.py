@@ -46,6 +46,7 @@ def get_view_tickets(user: User):
 
     return tickets
 
+
 def get_replied_tickets(tickets):
     """
     Get tickets with review response
@@ -65,8 +66,9 @@ def get_replied_tickets(tickets):
 
     return replied_tickets, replied_reviews
 
+
 def get_follows(user):
-    
+
     follows = UserFollows.objects.filter(user=user)
     followed_users = []
     for follow in follows:

@@ -18,7 +18,7 @@
     </div>
   </div>
   
-  {% if posts %}
+{% if posts %}
   {% for message in messages %}
     <p id="messages">{{message}}</p>
   {% endfor %} 
@@ -26,13 +26,11 @@
  {% include 'feeds/pagination.html' %}
 
   {% for post in posts %}
-  
     {% if post.content_type == 'REVIEW' %}
       {% include 'feeds/review_display.html' %}
     {% elif post.content_type == 'TICKET' %}
       {% include 'feeds/ticket_display.html' %}
     {% endif %}
-
   {% endfor %}
 
   <!-- paging -->
@@ -40,7 +38,6 @@
 
 {% else %}
 
-  
   <!-- No posts to display -->
   <div class="card text-center">
     <div class="card-body">
@@ -61,5 +58,5 @@
   
   {% endif %}
   
-  {% endblock content %}
+{% endblock content %}
   

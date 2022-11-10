@@ -24,10 +24,10 @@
   </fieldset>
 {% for message in messages %}
   <p id="messages">{{message}}</p>
-{% endfor %}
+{% endfor %} 
 
+ <!-- Following -->
   <div class="row">
-  <!-- Following -->
     <div class="col">
       <h6 class="mb-3">Users you follow ({{ user_follows.count }})</h6>
       {% if user_follows %}
@@ -47,7 +47,6 @@
             {% endfor %}
           </ul>
         </div>
-       
       {% elif not user_follows %}
         <div class="card text-center mb-5">
           <div class="card-body">
@@ -85,8 +84,6 @@
       {% endif %}
     </div>
   </div>
-
   <a class="btn btn-link text-decoration-none" href="{% url 'feeds-home' %}"><i class="fas fa-arrow-alt-circle-left"></i> Return to Feeds</a>
 </div>
-
 {% endblock content %}

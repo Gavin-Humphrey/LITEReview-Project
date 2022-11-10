@@ -5,3 +5,6 @@ __pycache__/
 env/
 .gitignore/
 /.gitignore/
+.setup.cfg/
+setup.cfg/
+/LITEReview/setup.cfg/

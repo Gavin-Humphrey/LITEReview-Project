@@ -1,3 +1,4 @@
+{% load static %}
 <article class="media content-section">
 
   <img class="rounded-circle article-img" src="{{ post.user.userprofile.image.url }}"
@@ -38,9 +39,10 @@
       {% endif %}
   
     </div>
-    <h6 class="mb-0"><span class="badge badge-success">Review</span></h6>
+    <h6 class="mb-2 mt-2"><span class="badge badge-success">Review</span></h6>
     <h3 class="mt-0">
-      <a class="text-dark text-decoration-none" href="{% url 'review-detail' post.id %}">{{ post.headline }}</a> ⤵️<br>
+      <a class="text-dark text-decoration-none" href="{% url 'review-detail' post.id %}">{{ post.headline }} 
+        <img src="{% static 'feeds/img/go_jump.png' %}" width="30" height="30" alt="reply png"></a><br>
       <p class="star-rating-{{ post.rating }}" id="stars">
         <i class="bi bi-star-fill"></i>
         <i class="bi bi-star-fill"></i>
@@ -70,7 +72,7 @@
           <small class="text-muted">{{ post.ticket.time_created|date:"H:i, F d, Y" }}</small>
 
           {% if post.ticket.user == user %}
-          <div class="modify-post">
+          <!-- <div class="modify-post">
             <ul class="list-item dropdown">
               <a class="list-link dropdown-toggle text-decoration-none" href="#" role="button" data-bs-toggle="dropdown">Modify</a>
               <ul class="dropdown-menu">
@@ -78,7 +80,7 @@
                 <li><a class="dropdown-item" href="{% url 'ticket-delete' post.id %}">Delete</a></li>
               </ul>
             </ul>
-          </div>
+          </div> -->
           {% elif post.ticket.user not in followed_users %}
           <div class="ml-3 text-muted" style="display:inline">
             You are not following {{ post.ticket.user }}
@@ -87,7 +89,7 @@
           {% endif %}
 
         </div>
-        <h6 class="mb-0"><span class="badge badge-pill badge-secondary">Ticket</span></h6>
+        <h6 class="mb-2 mt-2"><span class="badge badge-pill badge-secondary">Ticket</span></h6>
         <h3 class="mt-0">
         <a class="text-dark text-decoration-none" href="{% url 'ticket-detail' post.ticket.id %}">{{ post.ticket.title }}</a>
         </h3>

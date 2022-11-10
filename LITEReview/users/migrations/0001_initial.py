@@ -59,8 +59,8 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={####To be removed
-                'unique_together': {('user', 'followed_user')},
+            options={
+                "unique_together": {("user", "followed_user")},
             },
         ),
     ]

@@ -33,11 +33,10 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "LITEReview",
-    "users.apps.UsersConfig", 
+    "users.apps.UsersConfig",
     "crispy_forms",
     "feeds.apps.FeedsConfig",
     "follow_auth.apps.FollowAuthConfig",
-
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -96,9 +95,15 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
 ]
 
 
@@ -114,10 +119,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-
-
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
@@ -127,12 +128,11 @@ STATIC_URL = "static/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "_media")
 MEDIA_URL = "/media/"
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 LOGIN_REDIRECT_URL = "/feeds-home"
 
 LOGIN_URL = "login"
-
 
 
 # Default primary key field type
