@@ -53,7 +53,6 @@ def profile(request):
     return render(request, 'registration/profile.html', context)
 
 
-
 @login_required
 def follows_page(request):
     
@@ -89,7 +88,7 @@ def follows_page(request):
         'title': 'Follows',
     }
 
-    return render(request, 'registration/follow_page.html', 
+    return render(request, 'follow_auth/follow_page.html', 
     context
     )
 

@@ -12,9 +12,6 @@ from .utils import (get_view_reviews, get_view_tickets, get_replied_tickets, get
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.views.generic import DeleteView
-from django.urls import reverse_lazy ####added
-
-
 
 
 @login_required
@@ -31,7 +28,6 @@ def feeds(request):
 
     posts_list = sorted(chain(reviews, tickets), key=lambda post: post.time_created, reverse=True)
 
-    ####### Remove pagination here
     if posts_list:
         paginator = Paginator(posts_list, 3)
         page = request.GET.get('page')
@@ -46,22 +42,8 @@ def feeds(request):
         'title': 'Feeds',
         'followed_users': followed_users
     }
-
     return render(request, 'feeds/feeds.html', context)
-    ############
-
-    ######### use if you want to remove pagination
-
-
-"""return render(request, 'feeds/feeds.html', 
-    context = {
-        'posts': posts_list,
-        'r_tickets': replied_tickets,
-        'r_reviews': replied_reviews,
-        'title': 'Feeds',
-        'followed_users': followed_users
-    })"""
-
+    
 
 @login_required
 def user_posts(request, pk=None):
@@ -82,8 +64,6 @@ def user_posts(request, pk=None):
 
     posts_list = sorted(chain(reviews, tickets), key=lambda post: post.time_created, reverse=True)
 
-
-    ### Remove Pagination
     if posts_list:
         paginator = Paginator(posts_list, 3)
         page = request.GET.get('page')
@@ -102,19 +82,6 @@ def user_posts(request, pk=None):
     }
 
     return render(request, 'feeds/feeds.html', context)
-
-    ##############
-    
-    #### Use if you want to remove pagination
-"""return render(request, 'feeds/feeds.html', 
-
-    context = {
-        'posts': posts_list,
-        'title': f"{user.username}'s posts",
-        'r_tickets': replied_tickets,
-        'r_reviews': replied_reviews,
-        'followed_users': followed_users
-    })"""
 
 
 @login_required
@@ -155,7 +122,6 @@ def create_review(request):
         'r_form': review_form,
         'title': 'Post Review' 
     }
-
     return render(request, 'feeds/create_review.html', context)
 
 
@@ -187,7 +153,6 @@ def review_reply(request, pk):
     }
 
     return render(request, 'feeds/create_review.html', context)
-
 
 
 @login_required
@@ -232,8 +197,7 @@ def review_detail(request, pk):
 
 class ReviewDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Review
-    success_url = reverse_lazy('feeds-home') #### added
-    # success_url = '/' ##### Removed
+    success_url = '/feeds-home'
     context_object_name = 'post'
 
     def test_func(self):
@@ -319,8 +283,7 @@ def ticket_detail(request, pk):
 
 class TicketDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Ticket
-    success_url = reverse_lazy('feeds-home') #### Added
-    # success_url = '/' ### Removed
+    success_url = '/feeds-home'
     context_object_name = 'post'
 
     def test_func(self):
