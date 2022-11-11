@@ -94,8 +94,8 @@ html {
 }
 
 .account-img {
-    border: 4px solid green;
-}
+    border: 2px solid rgb(0, 115, 255);
+}  
 
 .msg-img  {
     width: 40px !important;
@@ -108,14 +108,18 @@ html {
 
 .site-header {
     color: #ffffff;
-} 
+}
+
+.btn-outline-primary {
+    border: 2px solid rgb(0, 115, 255) !important;
+}
 
 /* Posts */
 .content-section {
     background: rgb(241, 237, 237);
     padding: 10px 20px;
-    border: 2px solid green;
-    border-radius: 3px;
+    border: 2px solid rgb(0, 115, 255);
+    border-radius: 3px; 
     margin-bottom: 20px;
 }
 
@@ -129,10 +133,14 @@ html {
     word-spacing: normal !important;
 } 
 
+.mr-2 {
+    text-decoration: none !important;
+}
+
 .article-img {
     height: 50px;
     width: 50px;
-    border: 2px solid green;
+    border: 2px solid rgb(0, 115, 255);
     margin-right: 14px;
 }
 
@@ -180,11 +188,10 @@ html {
 }
 
 .img-thumbnail {
-    height: 250px !important;  /*200%*/ 
-    /* border-radius: 10px !important; */
+    height: 250px !important; 
     width: 70%;  
     object-fit: fill;
-    border: 2px solid green !important;
+    border: 2px solid rgb(0, 115, 255) !important;
 }
 
 .modify-post {
