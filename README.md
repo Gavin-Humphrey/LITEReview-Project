@@ -31,11 +31,11 @@ Ensuite, activez-le.
 
 MacOS et Linux :
 
-    source env/bin/activer
+    source env/bin/activate
 
     Installez ensuite les packages requis :
 
-    pip install -r exigences.txt
+    pip install -r requirements.txt
 
 Windows:
 
