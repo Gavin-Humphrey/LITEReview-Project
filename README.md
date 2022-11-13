@@ -1,20 +1,23 @@
-Projet LITReview
+Projet P9, LITReview
 
 Mon projet OpenClassrooms de la formation D-A Python.
 Il s'agit d'une application Web réalisée avec Django pour la société LitReview.
 Une application de réseau social pour demander et publier des critiques de livres/articles.
 
 Fonctionnalités:
-    Inscription / connexion.
-    Afficher un flux personnalisé en fonction de leurs abonnements.
-    Afficher un flux "Post" répertoriant toutes les demandes et les avis.
-    Triez les demandes et les acritiques sur chacune des pages les affichant.
-    Publier des demandes de critique.
-    Publier des critiques en réponse à une demande ou non.
-    Modifier/supprimer leurs demandes et critiques.
-    Consulter son profil, ses abonnements, modifier sa photo de profil.
-    S'abonner/se désabonner d'un utilisateur.
-    Rechercher un utilisateur.
+
+    * Inscription / connexion.
+    * Consulter un flux "Feeds" personnalisé en fonction de ses abonnements.
+    * Consulter un flux "My Post" répertoriant toutes les demandes et critiques.
+    * Trier les demandes et critiques sur chacune des pages les affichant.
+    * Publier des demandes de critique.
+    * Publier des critiques en réponse à une demande ou pas en réponse.
+    * Modifier / supprimer ses demandes et critiques.
+    * Consulter son profil, changer sa photo de profil.
+    * Rechercher un utilisateur.
+    * voir qui il suit et suivre qui il veut
+    * Se désabonner d'un utilisateur.
+    
 
 Installation & lancement
 
