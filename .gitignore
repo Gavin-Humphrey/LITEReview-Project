@@ -9,3 +9,7 @@ env/
 setup.cfg/
 /setup.cfg/
 /LITEReview/setup.cfg/
+/reviews_img/
+./reviews_img/
+/LITEReview/_media/reviews_img/
+reviews_img/

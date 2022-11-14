@@ -1,7 +1,6 @@
 {% extends 'feeds/base.html' %}
 {% load static %}
 
- 
 {% block content %}
 
 <div class="container p-0">
@@ -21,7 +20,7 @@
 {% if posts %}
   {% for message in messages %}
     <p id="messages">{{message}}</p>
-  {% endfor %} 
+  {% endfor %}  
  <!--paging -->
  {% include 'feeds/pagination.html' %}
 

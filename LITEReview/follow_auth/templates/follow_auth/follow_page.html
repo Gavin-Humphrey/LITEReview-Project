@@ -30,7 +30,7 @@
   <div class="row">
     <div class="col">
       <h6 class="mb-3">Users you follow ({{ user_follows.count }})</h6>
-      {% if user_follows %}
+       {% if user_follows %}
         <div class="card mb-5">
           <ul class="list-group list-group-flush">
             {% for follow in user_follows %}
@@ -38,7 +38,7 @@
                 <p class="mb-0">
                   <img class="rounded-circle article-img" src="{{ follow.followed_user.userprofile.image.url}}"
                        style="height:50px; width:50px" alt="{{ follow.followed_user.username }} profile picture">
-                  {{ follow.followed_user.username }}
+                       {{ follow.followed_user.username }}
                   <a class="btn btn-outline-danger btn-sm float-right mt-1" href="{% url 'confirm-unfollow' follow.id %}">
                     Unfollow
                   </a>
